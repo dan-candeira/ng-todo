@@ -1,0 +1,14 @@
+<form (submit)="add()" class="todo__input">
+  <label for="add" class="vh"> Write a new todo item </label>
+  <input
+    type="text"
+    id="add"
+    [(ngModel)]="todoItem"
+    placeholder="E.g. Adopt an owl"
+    name="todoItem"
+    autocomplete="off"
+  />
+  <button class="button" type="submit" [attr.disabled]="!todoItem || null">
+    Add
+  </button>
+</form>
