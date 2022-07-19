@@ -1,0 +1,60 @@
+/* Add application styles & imports to this file! */
+@import "reset";
+
+@import "blocks/button";
+@import "blocks/todo";
+@import "blocks/todo-input";
+@import "blocks/login-form";
+@import "blocks/logout";
+@import "blocks/alert";
+@import "blocks/todo-list";
+
+@import "utilities/visually-hidden";
+@import "utilities/wrapper";
+
+ul:empty,
+.empty-state {
+  display: none;
+}
+
+ul:empty + .empty-state {
+  display: block;
+}
+
+li label {
+  flex: 2;
+}
+
+li + li {
+  margin-top: 0.55rem;
+}
+
+button {
+  margin: 0;
+  line-height: 1;
+  border: 0;
+}
+
+button svg {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+input:focus,
+button:focus,
+[type="checkbox"]:focus + label .tick {
+  outline: none;
+  box-shadow: 0 0 0 0.125rem #2a7fff;
+}
+
+.link {
+  width: max-content;
+  a {
+    color: rgb(30, 80, 173);
+  }
+}
+
+.center {
+  margin: 0 auto;
+  margin-inline: auto;
+}

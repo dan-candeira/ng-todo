@@ -1,0 +1,36 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 30rem;
+  width: 85%;
+
+  // fallback
+  padding: 3rem 2rem;
+
+  padding-block: 3rem;
+  padding-inline: 2rem;
+
+  margin: 0 auto;
+  margin-block: auto;
+
+  > * + * {
+    margin-top: 1rem;
+  }
+
+  label {
+    font-weight: 700;
+  }
+
+  input {
+    display: block;
+    margin-top: 0.5rem;
+    width: 100%;
+
+    font-size: 0.8rem;
+
+    padding: 0.3rem 0.5rem;
+
+    padding-block: 0.3rem;
+    padding-inline: 0.5rem;
+  }
+}

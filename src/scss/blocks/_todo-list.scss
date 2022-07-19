@@ -1,0 +1,26 @@
+.todo {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+
+    @supports (display: grid) {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(40ch, 1fr));
+      grid-gap: 1rem;
+    }
+
+    > ul {
+      overflow-y: auto;
+      height: 40vh;
+      height: max(60rem, 70%);
+    }
+  }
+
+  &__title {
+    margin-bottom: 1rem;
+    margin-block-end: 1rem;
+    font-weight: bold;
+
+    position: sticky;
+  }
+}

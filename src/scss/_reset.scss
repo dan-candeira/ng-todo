@@ -1,0 +1,43 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: calc(1rem + 0.5vw);
+  font-family: Asap, sans-serif;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+a[class] {
+  text-decoration: none;
+  color: currentColor;
+}
+
+button {
+  margin: 0;
+  line-height: 1;
+  border: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+*:focus,
+button:focus,
+input:not([type="checkbox"]):focus {
+  outline: tomato dotted 3px;
+  outline-offset: 2px;
+  box-shadow: initial;
+}
+
+[tabindex="-1"]:focus {
+  outline: none;
+}
