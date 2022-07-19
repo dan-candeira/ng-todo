@@ -1,0 +1,63 @@
+<a class="[ button logout ]" data-variant="secondary" routerLink="/logout"
+  >Logout</a
+>
+
+<section aria-labelledby="todos-label" class="wrapper">
+  <h2 id="todos-label" tabindex="-1">Meus ToDos</h2>
+
+  <article class="todo__list">
+    <ng-container *ngIf="todos$ | async as todos">
+      <ul aria-labelledby="todo-list-label">
+        <li aria-hidden="true" class="todo__title" id="todo-list-label">
+          Todo
+        </li>
+        <ng-container *ngIf="todos.todo.length; else noTodoFound">
+          <li *ngFor="let item of todos.todo">
+            <app-todo-item
+              [todo]="item"
+              (delete)="onDelete($event)"
+              (statusChange)="onChange($event)"
+            ></app-todo-item>
+          </li>
+        </ng-container>
+        <ng-template #noTodoFound>
+          <li>no items found.</li>
+        </ng-template>
+      </ul>
+      <ul aria-labelledby="done-list-label">
+        <li aria-hidden="true" class="todo__title" id="done-list-label">
+          Done
+        </li>
+        <ng-container *ngIf="todos.done.length; else noDoneFound">
+          <li *ngFor="let item of (todos$ | async)?.done">
+            <app-todo-item
+              [todo]="item"
+              (delete)="onDelete($event)"
+              (statusChange)="onChange($event)"
+            ></app-todo-item>
+          </li>
+        </ng-container>
+        <ng-template #noDoneFound>
+          <li>no items found.</li>
+        </ng-template>
+      </ul>
+    </ng-container>
+  </article>
+  <app-todo-input (submited)="onCreate($event)"></app-todo-input>
+
+  <!-- TODO: Change the code bellow to avoid double subscribition -->
+  <div
+    class="alert"
+    *ngIf="feedback$ | async as feedback"
+    [ngClass]="feedback.type || ''"
+  >
+    {{ feedback.message }}
+  </div>
+
+  <!-- screen reader only -->
+  <div role="status" class="vh" aria-live="polite">
+    <ng-container *ngIf="feedback$ | async as feedback">
+      {{ feedback.message }}
+    </ng-container>
+  </div>
+</section>
