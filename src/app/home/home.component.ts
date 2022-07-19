@@ -10,7 +10,7 @@ import { TodoService } from '../services/todo.service';
 })
 export class HomeComponent {
   todos$ = this.todoService.getTodos();
-  feedback$: Observable<Alert> = this.alertService.getAlert();
+  feedback$: Observable<Alert | null> = this.alertService.getAlert();
 
   constructor(
     private todoService: TodoService,
@@ -26,7 +26,6 @@ export class HomeComponent {
   }
 
   onChange(todoInfo: { id: string; status: boolean }): void {
-    console.log(todoInfo);
     const { id, status } = todoInfo;
     this.todoService.patchTodo(id, status);
   }

@@ -21,7 +21,7 @@
           </li>
         </ng-container>
         <ng-template #noTodoFound>
-          <li>no items found.</li>
+          <li class="none-found">no items found.</li>
         </ng-template>
       </ul>
       <ul aria-labelledby="done-list-label">
@@ -38,16 +38,15 @@
           </li>
         </ng-container>
         <ng-template #noDoneFound>
-          <li>no items found.</li>
+          <li class="none-found">no items found.</li>
         </ng-template>
       </ul>
     </ng-container>
   </article>
   <app-todo-input (submited)="onCreate($event)"></app-todo-input>
 
-  <!-- TODO: Change the code bellow to avoid double subscribition -->
   <div
-    class="alert"
+    class="alert success"
     *ngIf="feedback$ | async as feedback"
     [ngClass]="feedback.type || ''"
   >
