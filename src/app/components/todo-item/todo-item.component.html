@@ -4,7 +4,7 @@
     [id]="todo.id"
     class="vh"
     [checked]="todo.done"
-    (change)="onChange()"
+    (change)="onChange($event)"
   />
   <label [for]="todo.id">
     <span class="tick"></span>

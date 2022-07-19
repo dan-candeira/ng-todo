@@ -11,13 +11,14 @@ export class TodoItemComponent {
   todo: TodoItem;
 
   @Output()
-  done = new EventEmitter<boolean>();
+  statusChange = new EventEmitter<{ status: boolean; id: string }>();
 
   @Output()
   delete = new EventEmitter<string>();
 
-  onChange(): void {
-    this.done.emit(!this.todo.done);
+  onChange(e: any): void {
+    const status = e.target.checked;
+    this.statusChange.emit({ id: this.todo.id, status });
   }
 
   deleteTodo(): void {
