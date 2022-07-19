@@ -18,7 +18,6 @@ export class TodoService {
 
   constructor(private alertService: AlertService) {
     const localStorageTodos = this.getTodosFromLocalStorage();
-    console.log(localStorageTodos);
 
     if (localStorageTodos) {
       this.todos$.next(localStorageTodos);
