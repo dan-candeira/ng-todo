@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TodoItem } from '../models/todo-item';
 import { v4 as uuidv4 } from 'uuid';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap, throwError } from 'rxjs';
 import { AlertService } from './alert.service';
 
 const todos = ['Clean room', 'Cook dinner', 'Clean house', 'Wash dishes'];
@@ -17,17 +17,27 @@ export class TodoService {
   todos$: BehaviorSubject<Todos> = new BehaviorSubject({ todo: [], done: [] });
 
   constructor(private alertService: AlertService) {
-    const items = this.loadDefaultTodos() as Array<TodoItem>;
-    console.log(items);
+    const localStorageTodos = this.getTodosFromLocalStorage();
+    console.log(localStorageTodos);
 
-    this.todos$.next({
-      todo: items.filter((t) => !t?.done) || [],
-      done: items.filter((t) => t?.done) || [],
-    });
+    if (localStorageTodos) {
+      this.todos$.next(localStorageTodos);
+    } else {
+      const items = this.loadDefaultTodos() as Array<TodoItem>;
+
+      this.todos$.next({
+        todo: items.filter((t) => !t?.done) || [],
+        done: items.filter((t) => t?.done) || [],
+      });
+    }
   }
 
   getTodos(): Observable<Todos> {
-    return this.todos$.asObservable();
+    return this.todos$.asObservable().pipe(
+      tap((todos) => {
+        localStorage.setItem('todos', JSON.stringify(todos));
+      })
+    );
   }
 
   postTodo(todoItem: string): Observable<any> {
@@ -138,8 +148,6 @@ export class TodoService {
       done: index % 2 === 0,
     })) as Array<TodoItem>;
 
-    console.log(items);
-
     return items;
   }
 
@@ -158,8 +166,6 @@ export class TodoService {
   ): void {
     const todoList = todos.todo.filter((t: TodoItem) => t.id !== id);
     const doneList = todos.done.filter((t: TodoItem) => t.id !== id);
-
-    console.log({ todoList, doneList, todo });
 
     if (status) {
       // move to done
@@ -190,5 +196,14 @@ export class TodoService {
       todo: todoList,
       done: doneList,
     });
+  }
+
+  getTodosFromLocalStorage(): any {
+    const items = JSON.parse(localStorage.getItem('todos') || '');
+
+    if (!items) {
+      return null;
+    }
+    return items;
   }
 }
