@@ -1,0 +1,16 @@
+<form [formGroup]="form" (submit)="onSubmit()" class="form">
+  <label>
+    Username
+    <input type="text" formControlName="username" />
+  </label>
+
+  <label>
+    Password
+    <input type="password" formControlName="password" />
+  </label>
+
+  <button class="button" data-variant="ghost">Login</button>
+</form>
+<div class="[ link ] [ center ]">
+  <a routerLink="/register"> Deseja criar uma conta? </a>
+</div>
