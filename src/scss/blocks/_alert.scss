@@ -1,6 +1,31 @@
 .alert {
-  // fallback
-  margin-top: 1rem;
+  display: flex;
 
-  margin-block-start: 1rem;
+  position: fixed;
+  top: 3rem;
+  right: 0;
+  transform: translateX(100%);
+  animation: toLeft 0.2s linear forwards;
+
+  // fallback
+  padding: 0.8rem 1rem;
+
+  padding-block: 0.8rem;
+  padding-inline: 1rem;
+
+  &.error {
+    background-color: hsl(0, 94%, 25%);
+    color: white;
+  }
+
+  &.success {
+    background-color: hsl(168, 82%, 17%);
+    color: white;
+  }
+}
+
+@keyframes toLeft {
+  to {
+    transform: translateX(0);
+  }
 }
