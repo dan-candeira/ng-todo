@@ -198,11 +198,13 @@ export class TodoService {
   }
 
   getTodosFromLocalStorage(): any {
-    const items = JSON.parse(localStorage.getItem('todos') || '');
+    const todosAsString = localStorage.getItem('todos');
+    let todos: TodoItem[] | null = null;
 
-    if (!items) {
-      return null;
+    if (todosAsString) {
+      todos = JSON.parse(todosAsString);
     }
-    return items;
+
+    return todos;
   }
 }
